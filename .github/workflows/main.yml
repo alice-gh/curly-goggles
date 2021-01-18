@@ -16,9 +16,16 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: try secret
+        run: |
+          echo "SECRET?"
+          echo ${{ secrets.ENV_SECRET }} | rev
   build:
     environment: 
-      name: "#myenv"
+      name: myenv
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -36,3 +43,4 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          echo ${{ secrets.ENV_SECRET }} | rev
